@@ -9,10 +9,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.izs.zsipedidos.domain.Categoria;
 import com.izs.zsipedidos.domain.Cidade;
+import com.izs.zsipedidos.domain.Cliente;
+import com.izs.zsipedidos.domain.Endereco;
 import com.izs.zsipedidos.domain.Estado;
 import com.izs.zsipedidos.domain.Produto;
+import com.izs.zsipedidos.domain.enums.TipoCliente;
 import com.izs.zsipedidos.repositories.CategoriaRepository;
 import com.izs.zsipedidos.repositories.CidadeRepository;
+import com.izs.zsipedidos.repositories.ClienteRepository;
+import com.izs.zsipedidos.repositories.EnderecoRepository;
 import com.izs.zsipedidos.repositories.EstadoRepository;
 import com.izs.zsipedidos.repositories.ProdutoRepository;
 
@@ -30,6 +35,12 @@ public class ZsipedidosApplication implements CommandLineRunner {
 	
 	@Autowired
 	private CidadeRepository cidadeRepository;
+	
+	@Autowired
+	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ZsipedidosApplication.class, args);
@@ -67,6 +78,17 @@ public class ZsipedidosApplication implements CommandLineRunner {
 		
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1,c2,c3));
+		
+		Cliente cli1 = new Cliente(null,"Maria Silva", "maria@gmail.com", "3637891237", TipoCliente.PESSOAFISICA);
+		cli1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
+		
+		Endereco e1 = new Endereco(null, "Rua Flores", "300", "Apto 303", "Jardin", "38220834", cli1, c1);
+		Endereco e2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "38777012", cli1, c2);
+		
+		cli1.getEnderecos().addAll(Arrays.asList(e1,e2));
+		
+		clienteRepository.saveAll(Arrays.asList(cli1));
+		enderecoRepository.saveAll(Arrays.asList(e1,e2));
 	}
 
 }
