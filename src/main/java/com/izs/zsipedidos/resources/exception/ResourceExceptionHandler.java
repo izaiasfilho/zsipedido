@@ -8,9 +8,15 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.izs.zsipedidos.services.exeptions.ObjectNotFoundExeption;
 
 import jakarta.servlet.http.HttpServletRequest;
-
+/*
+ *  permite manipular exceções
+ */
 @ControllerAdvice
 public class ResourceExceptionHandler {
+	/**
+	 * Manipulador de exeçoes do resources
+	 * Responsavel por capturar as Exceptions
+	 */
 
 	@ExceptionHandler(ObjectNotFoundExeption.class)
 	public ResponseEntity<StarndardError> objectNotFoundException(ObjectNotFoundExeption e, HttpServletRequest request){

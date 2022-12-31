@@ -31,6 +31,10 @@ public class Produto implements Serializable{
 	private Double preco;
 	
 	
+	/**
+	 * @JsonBackReference
+	 * Os objetos ja foram tratados do outro lado, não trazer deste lado
+	 */
 	@JsonBackReference
 	@ManyToMany
 	@JoinTable(name = "PRODUTO_CATEGORIA",
