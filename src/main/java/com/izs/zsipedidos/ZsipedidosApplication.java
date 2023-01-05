@@ -14,6 +14,7 @@ import com.izs.zsipedidos.domain.Cidade;
 import com.izs.zsipedidos.domain.Cliente;
 import com.izs.zsipedidos.domain.Endereco;
 import com.izs.zsipedidos.domain.Estado;
+import com.izs.zsipedidos.domain.ItemPedido;
 import com.izs.zsipedidos.domain.Pagamento;
 import com.izs.zsipedidos.domain.PagamentoComBoleto;
 import com.izs.zsipedidos.domain.PagamentoComCartao;
@@ -26,6 +27,7 @@ import com.izs.zsipedidos.repositories.CidadeRepository;
 import com.izs.zsipedidos.repositories.ClienteRepository;
 import com.izs.zsipedidos.repositories.EnderecoRepository;
 import com.izs.zsipedidos.repositories.EstadoRepository;
+import com.izs.zsipedidos.repositories.ItemPedidoRepository;
 import com.izs.zsipedidos.repositories.PagamentoRepository;
 import com.izs.zsipedidos.repositories.PedidoRepository;
 import com.izs.zsipedidos.repositories.ProdutoRepository;
@@ -56,6 +58,9 @@ public class ZsipedidosApplication implements CommandLineRunner {
 	
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+	
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ZsipedidosApplication.class, args);
@@ -123,6 +128,22 @@ public class ZsipedidosApplication implements CommandLineRunner {
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		
 		pagamentoRepository.saveAll(Arrays.asList(pagto1,pagto2));
+		
+		
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+		
+		
+		ped1.getItens().addAll(Arrays.asList(ip1,ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+		
+		itemPedidoRepository.saveAll(Arrays.asList(ip1,ip2,ip3));
+		
 	}
 
 }
