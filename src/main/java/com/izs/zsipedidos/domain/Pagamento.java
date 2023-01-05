@@ -2,7 +2,7 @@ package com.izs.zsipedidos.domain;
 
 import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.izs.zsipedidos.domain.enums.EstadoPagamento;
 
 import jakarta.persistence.Entity;
@@ -27,7 +27,7 @@ public abstract class Pagamento implements Serializable{
 	
 	private Integer estadoPagamento;
 	
-	@JsonBackReference
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name = "pedido_id")
 	@MapsId

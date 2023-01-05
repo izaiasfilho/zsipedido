@@ -32,7 +32,7 @@ public class Categoria implements Serializable{
 	 * Trata referencia siclica, referencia deve ser gerenciada pelo json
 	 * Os objetos instanciados devem vim neste lado
 	 */
-	@JsonManagedReference
+	
 	@ManyToMany(mappedBy = "categorias")
 	private List<Produto> produtos = new ArrayList<>();
 	
