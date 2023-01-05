@@ -42,7 +42,6 @@ public class Pedido implements Serializable{
 	private Endereco enderecoDeEntrega;
 	
 	@OneToMany(mappedBy="id.pedido")
-	//private List<ItemPedido> itens = new ArrayList<>(); 
 	private Set<ItemPedido> itens = new HashSet<>();
 	
 	
