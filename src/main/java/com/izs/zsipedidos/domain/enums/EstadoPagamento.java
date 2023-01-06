@@ -1,5 +1,7 @@
 package com.izs.zsipedidos.domain.enums;
 
+
+
 public enum EstadoPagamento {
 	
 	PENDENTE(1, "pendente"),
