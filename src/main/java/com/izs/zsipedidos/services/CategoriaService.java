@@ -1,10 +1,15 @@
 package com.izs.zsipedidos.services;
 
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.izs.zsipedidos.domain.Categoria;
+import com.izs.zsipedidos.domain.DTO.CategoriaDTO;
 import com.izs.zsipedidos.repositories.CategoriaRepository;
 import com.izs.zsipedidos.services.exeptions.ObjectNotFoundExeption;
 
@@ -35,4 +40,11 @@ public class CategoriaService {
 			throw new DataIntegrityViolationException("Não é possivel excluir uma categoria que possue produto!");
 		}
     }
+    
+    public List<CategoriaDTO> findAll() {
+		return repo.findAll()
+				.stream()
+				.map(CategoriaDTO::new)
+				.collect(Collectors.toList());	
+	}
 }
